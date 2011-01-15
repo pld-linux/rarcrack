@@ -37,7 +37,7 @@ and Rar file passwords.
 %patch1 -p1
 
 %build
-%{__make} CC="%{__cc}" CFLAGS="%{rpmcflags}"
+%{__make} CC="%{__cc}" CFLAGS="%{rpmcflags} %{rpmcppflags}"
 
 %if %{with tests}
 rm -f test.*.xml
