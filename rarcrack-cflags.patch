@@ -1,0 +1,11 @@
+--- rarcrack-0.2/Makefile.orig	2011-01-15 21:10:00.000000000 +0100
++++ rarcrack-0.2/Makefile	2011-01-15 21:12:06.368904933 +0100
+@@ -3,7 +3,7 @@
+ DOCDIR=${PREFIX}/share/doc/rarcrack
+ 
+ all:
+-	${CC} -pthread rarcrack.c `xml2-config --libs --cflags` -O2 -o rarcrack
++	${CC} -pthread rarcrack.c `xml2-config --libs --cflags` ${CFLAGS} -o rarcrack
+ clean:
+ 	-rm *.o rarcrack
+ install:
