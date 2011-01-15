@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	tests		# do not proceed cracking selftest (few minutes).
+#
 Summary:	Password recovery tool for Rar, 7z and Zip archives
 Name:		rarcrack
 Version:	0.2
@@ -10,6 +14,11 @@ Patch0:		%{name}-cflags.patch
 Patch1:		%{name}-mime.patch
 URL:		http://sourceforge.net/projects/rarcrack/
 BuildRequires:	libxml2-devel
+%if %{with tests}
+BuildRequires:	p7zip
+BuildRequires:	unrar
+BuildRequires:	unzip
+%endif
 Requires:	file
 Requires:	p7zip
 Requires:	unrar
@@ -29,6 +38,14 @@ and Rar file passwords.
 
 %build
 %{__make} CC="%{__cc}" CFLAGS="%{rpmcflags}"
+
+%if %{with tests}
+rm -f test.*.xml
+# each test archive is encrypted with passwrd '100'.
+./rarcrack test.7z
+./rarcrack test.rar
+./rarcrack test.zip
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
