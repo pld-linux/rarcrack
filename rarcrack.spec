@@ -3,12 +3,13 @@
 %bcond_without	tests		# do not proceed cracking selftest (few minutes).
 #
 Summary:	Password recovery tool for Rar, 7z and Zip archives
+Summary(pl.UTF-8):	Narzędzie do odtwarzania haseł do archiwów Rar, 7z i Zip
 Name:		rarcrack
 Version:	0.2
 Release:	1
 License:	GPL v2
-Group:		Applications
-Source0:	http://downloads.sourceforge.net/project/rarcrack/rarcrack-%{version}/%5BUnnamed%20release%5D/%{name}-%{version}.tar.bz2
+Group:		Applications/Archiving
+Source0:	http://downloads.sourceforge.net/rarcrack/%{name}-%{version}.tar.bz2
 # Source0-md5:	62d0cf77c6c4edc7204305649f8b7362
 Patch0:		%{name}-cflags.patch
 Patch1:		%{name}-mime.patch
@@ -31,16 +32,23 @@ compressed file's password. If you forget your encrypted file
 password, this program is the solution. This program can crack Zip, 7z
 and Rar file passwords.
 
+%description -l pl.UTF-8
+Ten program używa algorytmu brute force do zgadywania haseł do
+zaszyfrowanych, skompresowanych plików. Jest pomocą w przypadku
+zapomnienia hasła do zaszyfrowanego pliku. Potrafi łamać hasła do
+archiwów Zip, 7z i Rar.
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 
 %build
-%{__make} CC="%{__cc}" CFLAGS="%{rpmcflags} %{rpmcppflags}"
+%{__make} \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags} %{rpmcppflags}"
 
 %if %{with tests}
-rm -f test.*.xml
 # each test archive is encrypted with passwrd '100'.
 ./rarcrack test.7z
 ./rarcrack test.rar
