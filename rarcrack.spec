@@ -6,7 +6,7 @@ Summary:	Password recovery tool for Rar, 7z and Zip archives
 Summary(pl.UTF-8):	Narzędzie do odtwarzania haseł do archiwów Rar, 7z i Zip
 Name:		rarcrack
 Version:	0.2
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Archiving
 Source0:	http://downloads.sourceforge.net/rarcrack/%{name}-%{version}.tar.bz2
